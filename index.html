@@ -776,12 +776,9 @@ header {
       <textarea class="obs-area" id="obsGerais" placeholder="Anotações adicionais para o fechamento da folha..."></textarea>
     </div>
 
-    <!-- Google Sheets config -->
-    <div class="sheets-config">
-      <span class="sheets-config-label">📊 Google Sheets</span>
-      <input class="sheets-input" type="text" id="sheetsUrl"
-        placeholder="Cole aqui a URL do seu Google Apps Script..."
-        value="">
+    <!-- Google Sheets config (URL fixa, campo oculto) -->
+    <div id="sheetsConfigRow" style="display:none">
+      <input class="sheets-input" type="text" id="sheetsUrl" value="">
       <span class="sheets-status" id="sheetsStatus" style="display:none"></span>
     </div>
 
@@ -1134,7 +1131,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 
-async function salvarNoSheets() {
+async function salvarNoSheets(forcar = false) {
   const url = document.getElementById('sheetsUrl').value.trim();
   const statusEl = document.getElementById('sheetsStatus');
   const btn = document.getElementById('btnSheets');
@@ -1145,7 +1142,6 @@ async function salvarNoSheets() {
     statusEl.style.display = 'inline-block';
     return;
   }
-
   if (!dadosAtuais) {
     statusEl.textContent = '⚠ Nenhum dado processado';
     statusEl.className = 'sheets-status err';
@@ -1154,17 +1150,16 @@ async function salvarNoSheets() {
   }
 
   localStorage.setItem('semadi_sheets_url', url);
-
   btn.disabled = true;
   statusEl.textContent = '⏳ Enviando...';
   statusEl.className = 'sheets-status sending';
   statusEl.style.display = 'inline-block';
 
-  // Montar payload completo
   const obs = document.getElementById('obsGerais')?.value || '';
   const agora = new Date().toLocaleString('pt-BR');
 
   const payload = {
+    forcar,
     edicao: dadosAtuais.edicao || {},
     dataProcessamento: agora,
     totalVerificados: verificados.size,
@@ -1199,12 +1194,23 @@ async function salvarNoSheets() {
       body: JSON.stringify(payload)
     });
 
-    if (resp.ok) {
-      const txt = await resp.text();
+    if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
+
+    const json = await resp.json();
+
+    if (json.status === 'duplicata') {
+      // Mostrar modal de confirmação
+      btn.disabled = false;
+      statusEl.style.display = 'none';
+      mostrarModalDuplicata(json.msg);
+      return;
+    }
+
+    if (json.status === 'ok') {
       statusEl.textContent = '✓ Salvo no Sheets!';
       statusEl.className = 'sheets-status ok';
     } else {
-      throw new Error(`HTTP ${resp.status}`);
+      throw new Error(json.msg || 'Erro desconhecido');
     }
   } catch(e) {
     statusEl.textContent = `✕ Erro: ${e.message}`;
@@ -1213,6 +1219,41 @@ async function salvarNoSheets() {
     btn.disabled = false;
     setTimeout(() => { statusEl.style.display = 'none'; }, 5000);
   }
+}
+
+function mostrarModalDuplicata(msg) {
+  // Remover modal anterior se existir
+  document.getElementById('modalDuplicata')?.remove();
+
+  const modal = document.createElement('div');
+  modal.id = 'modalDuplicata';
+  modal.style.cssText = `
+    position:fixed;inset:0;background:rgba(0,0,0,.7);
+    display:flex;align-items:center;justify-content:center;z-index:9999;
+  `;
+  modal.innerHTML = `
+    <div style="background:#1A1A2E;border:1px solid #4A2020;border-radius:14px;padding:28px 28px 22px;max-width:420px;width:90%;box-shadow:0 8px 40px rgba(0,0,0,.6)">
+      <div style="font-size:22px;margin-bottom:12px">⚠️</div>
+      <div style="font-size:14px;font-weight:800;color:#F15B5B;letter-spacing:.05em;text-transform:uppercase;margin-bottom:10px">Dados já salvos</div>
+      <div style="font-size:13px;color:#9090B0;line-height:1.6;margin-bottom:22px">${msg}<br><br>Deseja salvar mesmo assim, criando uma nova aba duplicada?</div>
+      <div style="display:flex;gap:10px;justify-content:flex-end">
+        <button onclick="document.getElementById('modalDuplicata').remove()"
+          style="background:#252540;color:#9090B0;border:1px solid #32324A;border-radius:8px;padding:9px 18px;font-family:inherit;font-size:13px;font-weight:700;cursor:pointer">
+          Cancelar
+        </button>
+        <button onclick="document.getElementById('modalDuplicata').remove();salvarNoSheets(true)"
+          style="background:#F15B5B;color:#fff;border:none;border-radius:8px;padding:9px 18px;font-family:inherit;font-size:13px;font-weight:700;cursor:pointer">
+          Salvar mesmo assim
+        </button>
+      </div>
+    </div>
+  `;
+  document.body.appendChild(modal);
+
+  // Fechar ao clicar fora
+  modal.addEventListener('click', e => {
+    if (e.target === modal) modal.remove();
+  });
 }
 </script>
 </body>
