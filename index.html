@@ -562,6 +562,71 @@ header {
 /* ══ DIVIDER ══════════════════════════════════════════════ */
 .divider { height: 1px; background: var(--brd); margin: 24px 0; }
 
+/* ══ SHEETS CONFIG ════════════════════════════════════════ */
+.sheets-config {
+  background: var(--s1);
+  border: 1px solid var(--brd);
+  border-radius: var(--r-md);
+  padding: 14px 16px;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.sheets-config-label {
+  font-size: 11px;
+  font-weight: 800;
+  color: var(--t2);
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.sheets-input {
+  flex: 1;
+  min-width: 200px;
+  background: var(--s2);
+  border: 1px solid var(--brd2);
+  border-radius: var(--r-sm);
+  padding: 8px 12px;
+  color: var(--t1);
+  font-family: var(--font);
+  font-size: 12px;
+  font-weight: 500;
+  outline: none;
+  transition: border-color .15s;
+}
+.sheets-input::placeholder { color: var(--t3); }
+.sheets-input:focus { border-color: #34A853; box-shadow: 0 0 0 3px rgba(52,168,83,.12); }
+.sheets-status {
+  font-size: 11px;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 20px;
+  white-space: nowrap;
+}
+.sheets-status.ok  { background: var(--success-bg); color: var(--success); border: 1px solid var(--success-brd); }
+.sheets-status.err { background: var(--danger-bg);  color: var(--danger);  border: 1px solid var(--danger-brd); }
+.sheets-status.sending { background: var(--warn-bg); color: var(--warn); border: 1px solid var(--warn-brd); }
+.btn-sheets {
+  background: #1a5e2a;
+  color: #6fcf97;
+  border: 1px solid #2d7a3a !important;
+  padding: 8px 16px;
+  border-radius: var(--r-sm);
+  font-family: var(--font);
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: all .15s;
+  white-space: nowrap;
+}
+.btn-sheets:hover { background: #216b31; border-color: #3a9e4a !important; }
+.btn-sheets:disabled { opacity: .4; cursor: not-allowed; }
+
 /* ══ EMPTY STATE ══════════════════════════════════════════ */
 .empty-state {
   text-align: center;
@@ -711,10 +776,20 @@ header {
       <textarea class="obs-area" id="obsGerais" placeholder="Anotações adicionais para o fechamento da folha..."></textarea>
     </div>
 
+    <!-- Google Sheets config -->
+    <div class="sheets-config">
+      <span class="sheets-config-label">📊 Google Sheets</span>
+      <input class="sheets-input" type="text" id="sheetsUrl"
+        placeholder="Cole aqui a URL do seu Google Apps Script..."
+        value="">
+      <span class="sheets-status" id="sheetsStatus" style="display:none"></span>
+    </div>
+
     <!-- Export -->
     <div class="export-row">
       <span class="export-row-label">Ações</span>
-      <button class="btn btn-primary" onclick="exportarRelatorio()">⬇ Exportar Relatório</button>
+      <button class="btn btn-primary" onclick="exportarRelatorio()">⬇ Exportar .txt</button>
+      <button class="btn-sheets" id="btnSheets" onclick="salvarNoSheets()">📊 Salvar no Sheets</button>
       <button class="btn btn-secondary" onclick="resetar()">↺ Nova Edição</button>
     </div>
 
@@ -863,6 +938,7 @@ REGRAS GERAIS:
 // ─── RENDER ──────────────────────────────────────────────
 function renderPainel(data) {
   setLoading(false);
+  dadosAtuais = data;
   edicaoInfo = data.edicao || {};
   document.getElementById('editionBadge').textContent = `Edição ${edicaoInfo.numero || '—'} · ${edicaoInfo.data || '—'}`;
 
@@ -1013,7 +1089,7 @@ function resetar() {
   document.getElementById('editionBadge').textContent = 'Nenhuma edição carregada';
   document.getElementById('fileInput').value = '';
   esconderErro();
-  todosItens = []; verificados = new Set();
+  todosItens = []; verificados = new Set(); dadosAtuais = null;
 }
 
 function mostrarErro(titulo, msg, hint) {
@@ -1040,6 +1116,103 @@ function fileToBase64(file) {
     r.onerror = rej;
     r.readAsDataURL(file);
   });
+}
+
+// ─── GOOGLE SHEETS ────────────────────────────────────────
+let dadosAtuais = null;
+
+// Carregar URL salva do localStorage
+window.addEventListener('DOMContentLoaded', () => {
+  const savedUrl = localStorage.getItem('semadi_sheets_url');
+  if (savedUrl) document.getElementById('sheetsUrl').value = savedUrl;
+});
+
+// Salvar URL no localStorage quando alterar
+document.addEventListener('DOMContentLoaded', () => {
+  document.getElementById('sheetsUrl').addEventListener('change', (e) => {
+    localStorage.setItem('semadi_sheets_url', e.target.value.trim());
+  });
+});
+
+async function salvarNoSheets() {
+  const url = document.getElementById('sheetsUrl').value.trim();
+  const statusEl = document.getElementById('sheetsStatus');
+  const btn = document.getElementById('btnSheets');
+
+  if (!url) {
+    statusEl.textContent = '⚠ Cole a URL do Apps Script';
+    statusEl.className = 'sheets-status err';
+    statusEl.style.display = 'inline-block';
+    return;
+  }
+
+  if (!dadosAtuais) {
+    statusEl.textContent = '⚠ Nenhum dado processado';
+    statusEl.className = 'sheets-status err';
+    statusEl.style.display = 'inline-block';
+    return;
+  }
+
+  localStorage.setItem('semadi_sheets_url', url);
+
+  btn.disabled = true;
+  statusEl.textContent = '⏳ Enviando...';
+  statusEl.className = 'sheets-status sending';
+  statusEl.style.display = 'inline-block';
+
+  // Montar payload completo
+  const obs = document.getElementById('obsGerais')?.value || '';
+  const agora = new Date().toLocaleString('pt-BR');
+
+  const payload = {
+    edicao: dadosAtuais.edicao || {},
+    dataProcessamento: agora,
+    totalVerificados: verificados.size,
+    totalAtos: todosItens.length,
+    observacoes: obs,
+    resumo: {
+      exoneracoes:       (dadosAtuais.exoneracoes||[]).length,
+      aposentadorias:    (dadosAtuais.aposentadorias||[]).length,
+      promocoes:         (dadosAtuais.promocoes||[]).length,
+      progressoes:       (dadosAtuais.progressoes||[]).length,
+      gratificacoes:     (dadosAtuais.gratificacoes||[]).length,
+      designacoes:       (dadosAtuais.designacoes||[]).length,
+      adicional:         (dadosAtuais.adicional||[]).length,
+      estabilidades:     (dadosAtuais.estabilidades||[]).length,
+      abonosPermanencia: (dadosAtuais.abonosPermanencia||[]).length,
+      reversoes:         (dadosAtuais.reversoes||[]).length,
+      readaptacoes:      (dadosAtuais.readaptacoes||[]).length,
+      licencasSaude:     (dadosAtuais.licencasSaude||[]).length,
+      licencasOutras:    (dadosAtuais.licencasOutras||[]).length,
+      sentencasJudiciais:(dadosAtuais.sentencasJudiciais||[]).length,
+      legislacao:        (dadosAtuais.legislacao||[]).length,
+      contratos:         (dadosAtuais.contratos||[]).length,
+      contratacoes:      (dadosAtuais.contratacoes||[]).length,
+    },
+    dados: dadosAtuais
+  };
+
+  try {
+    const resp = await fetch(url, {
+      method: 'POST',
+      headers: { 'Content-Type': 'text/plain' },
+      body: JSON.stringify(payload)
+    });
+
+    if (resp.ok) {
+      const txt = await resp.text();
+      statusEl.textContent = '✓ Salvo no Sheets!';
+      statusEl.className = 'sheets-status ok';
+    } else {
+      throw new Error(`HTTP ${resp.status}`);
+    }
+  } catch(e) {
+    statusEl.textContent = `✕ Erro: ${e.message}`;
+    statusEl.className = 'sheets-status err';
+  } finally {
+    btn.disabled = false;
+    setTimeout(() => { statusEl.style.display = 'none'; }, 5000);
+  }
 }
 </script>
 </body>
