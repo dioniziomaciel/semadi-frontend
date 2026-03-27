@@ -3,14 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SEMADI Â· Monitor Diogrande</title>
+<title>SEMADI · Monitor Diogrande</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400&display=swap" rel="stylesheet">
 <style>
-/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-   SEMADI MONITOR DIOGRANDE â€” v3
-   Design System: Coral/Pomo Â· Nunito Â· Deep Navy Dark
-â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+/* ════════════════════════════════════════════════════════
+   SEMADI MONITOR DIOGRANDE — v3
+   Design System: Coral/Pomo · Nunito · Deep Navy Dark
+════════════════════════════════════════════════════════ */
 
 :root {
   --accent:    #F15B5B;
@@ -69,12 +69,12 @@ body {
   min-height: 100vh;
 }
 
-/* â”€â”€ SCROLLBAR â”€â”€ */
+/* ── SCROLLBAR ── */
 ::-webkit-scrollbar { width: 5px; }
 ::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb { background: var(--brd2); border-radius: 3px; }
 
-/* â•â• HEADER â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+/* ══ HEADER ══════════════════════════════════════════════ */
 header {
   background: var(--s0);
   border-bottom: 1px solid var(--brd);
@@ -124,7 +124,7 @@ header {
   white-space: nowrap;
 }
 
-/* â•â• BUTTONS â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+/* ══ BUTTONS ══════════════════════════════════════════════ */
 .btn {
   font-family: var(--font);
   font-size: 13px;
@@ -174,14 +174,14 @@ header {
 
 .btn-sm { padding: 6px 13px; font-size: 12px; }
 
-/* â•â• MAIN LAYOUT â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+/* ══ MAIN LAYOUT ══════════════════════════════════════════ */
 .main-wrap {
   max-width: 900px;
   margin: 0 auto;
   padding: 32px 24px 60px;
 }
 
-/* â•â• UPLOAD â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+/* ══ UPLOAD ═══════════════════════════════════════════════ */
 .upload-section {
   border: 1.5px dashed var(--brd2);
   border-radius: var(--r-lg);
@@ -228,7 +228,7 @@ header {
   text-transform: uppercase;
 }
 
-/* â•â• LOADING â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+/* ══ LOADING ══════════════════════════════════════════════ */
 .loading-bar {
   height: 2px;
   background: var(--brd);
@@ -259,7 +259,7 @@ header {
 }
 .loading-msg.active { display: block; }
 
-/* â•â• ALERT â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+/* ══ ALERT ════════════════════════════════════════════════ */
 .alert {
   border-radius: var(--r-md);
   padding: 13px 16px;
@@ -278,7 +278,7 @@ header {
 .alert-success { background: var(--success-bg); border: 1px solid var(--success-brd); color: var(--success); }
 .alert-danger  { background: var(--danger-bg);  border: 1px solid var(--danger-brd);  color: var(--danger); }
 
-/* â•â• PROGRESS â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+/* ══ PROGRESS ═════════════════════════════════════════════ */
 .progress-wrap {
   background: var(--s1);
   border: 1px solid var(--brd);
@@ -318,7 +318,7 @@ header {
   box-shadow: 0 0 8px rgba(241,91,91,.4);
 }
 
-/* â•â• STATS â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+/* ══ STATS ════════════════════════════════════════════════ */
 .stats-row {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(88px, 1fr));
@@ -349,7 +349,7 @@ header {
   text-transform: uppercase;
 }
 
-/* â•â• SECTION â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+/* ══ SECTION ══════════════════════════════════════════════ */
 .section { margin-bottom: 24px; }
 
 .section-header {
@@ -380,7 +380,7 @@ header {
   margin-left: auto;
 }
 
-/* â•â• ITEM CARD â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+/* ══ ITEM CARD ════════════════════════════════════════════ */
 .item-list { display: flex; flex-direction: column; gap: 8px; }
 
 .item-card {
@@ -408,7 +408,7 @@ header {
   color: var(--t3);
 }
 
-/* Cor da borda left por seÃ§Ã£o (aplicada via JS inline) */
+/* Cor da borda left por seção (aplicada via JS inline) */
 .item-card[data-section="exo"]  { border-left-color: var(--danger); }
 .item-card[data-section="apo"]  { border-left-color: #C084FC; }
 .item-card[data-section="pro"]  { border-left-color: var(--success); }
@@ -447,7 +447,7 @@ header {
   margin-top: 8px;
 }
 
-/* â•â• TAGS â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+/* ══ TAGS ═════════════════════════════════════════════════ */
 .tag {
   font-size: 10.5px;
   font-weight: 700;
@@ -462,7 +462,7 @@ header {
 .tag-blue   { background: var(--info-bg);    color: var(--info);    border: 1px solid var(--info-brd); }
 .tag-gray   { background: var(--s2);         color: var(--t2);      border: 1px solid var(--brd2); }
 
-/* â•â• CHECK BUTTON â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+/* ══ CHECK BUTTON ═════════════════════════════════════════ */
 .check-btn {
   background: none;
   border: 1px solid var(--brd2);
@@ -490,7 +490,7 @@ header {
   box-shadow: 0 0 10px rgba(78,205,196,.2);
 }
 
-/* â•â• ERROR BOX â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+/* ══ ERROR BOX ════════════════════════════════════════════ */
 .error-box {
   background: var(--danger-bg);
   border: 1px solid var(--danger-brd);
@@ -519,7 +519,7 @@ header {
   white-space: pre-line;
 }
 
-/* â•â• OBSERVAÃ‡Ã•ES â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+/* ══ OBSERVAÇÕES ══════════════════════════════════════════ */
 .obs-area {
   width: 100%;
   background: var(--s2);
@@ -541,7 +541,7 @@ header {
   box-shadow: 0 0 0 3px rgba(241,91,91,.15);
 }
 
-/* â•â• EXPORT ROW â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+/* ══ EXPORT ROW ═══════════════════════════════════════════ */
 .export-row {
   display: flex;
   gap: 10px;
@@ -559,10 +559,10 @@ header {
   margin-right: 4px;
 }
 
-/* â•â• DIVIDER â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+/* ══ DIVIDER ══════════════════════════════════════════════ */
 .divider { height: 1px; background: var(--brd); margin: 24px 0; }
 
-/* â•â• EMPTY STATE â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+/* ══ EMPTY STATE ══════════════════════════════════════════ */
 .empty-state {
   text-align: center;
   padding: 64px 20px;
@@ -584,7 +584,7 @@ header {
   line-height: 1.7;
 }
 
-/* â•â• SECTION LABEL REUSABLE â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+/* ══ SECTION LABEL REUSABLE ═══════════════════════════════ */
 .sec-label {
   font-size: 10px;
   font-weight: 800;
@@ -605,7 +605,7 @@ header {
   flex-shrink: 0;
 }
 
-/* â•â• RESPONSIVE â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+/* ══ RESPONSIVE ═══════════════════════════════════════════ */
 @media (max-width: 700px) {
   header { padding: 0 16px; }
   .logo-sub, .logo-divider { display: none; }
@@ -615,7 +615,7 @@ header {
   .upload-section { padding: 32px 20px; }
 }
 
-/* â•â• SKELETON â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+/* ══ SKELETON ═════════════════════════════════════════════ */
 @keyframes skeletonPulse {
   0%   { background-position: 200% 0; }
   100% { background-position: -200% 0; }
@@ -627,7 +627,7 @@ header {
   border-radius: var(--r-sm);
 }
 
-/* â•â• PANEL ENTER ANIMATION â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+/* ══ PANEL ENTER ANIMATION ════════════════════════════════ */
 @keyframes fadeSlide {
   from { opacity: 0; transform: translateY(8px); }
   to   { opacity: 1; transform: translateY(0); }
@@ -637,39 +637,39 @@ header {
 </head>
 <body>
 
-<!-- â•â• HEADER â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
+<!-- ══ HEADER ══════════════════════════════════════════════ -->
 <header>
   <div class="logo-wrap">
     <span class="logo-main">SEMADI</span>
     <div class="logo-divider"></div>
-    <span class="logo-sub">Monitor Â· Diogrande</span>
+    <span class="logo-sub">Monitor · Diogrande</span>
   </div>
   <div class="header-right">
-    <span class="edition-badge" id="editionBadge">Nenhuma ediÃ§Ã£o carregada</span>
-    <button class="btn btn-secondary btn-sm" onclick="exportarRelatorio()">â¬‡ Exportar</button>
+    <span class="edition-badge" id="editionBadge">Nenhuma edição carregada</span>
+    <button class="btn btn-secondary btn-sm" onclick="exportarRelatorio()">⬇ Exportar</button>
   </div>
 </header>
 
-<!-- â•â• MAIN â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
+<!-- ══ MAIN ════════════════════════════════════════════════ -->
 <div class="main-wrap">
 
   <!-- UPLOAD -->
   <div class="upload-section" id="uploadZone">
     <input type="file" accept=".pdf" id="fileInput" onchange="handleFile(event)">
-    <span class="upload-icon">ðŸ“„</span>
+    <span class="upload-icon">📄</span>
     <div class="upload-title">Arraste o PDF do Diogrande aqui</div>
-    <div class="upload-sub">ou clique para selecionar o arquivo Â· Processamento com IA</div>
-    <div class="upload-hint">PDF Â· Processamento via Claude Â· MÃ¡x. recomendado 50 MB</div>
+    <div class="upload-sub">ou clique para selecionar o arquivo · Processamento com IA</div>
+    <div class="upload-hint">PDF · Processamento via Claude · Máx. recomendado 50 MB</div>
     <button class="btn btn-primary" style="margin-top:18px;pointer-events:none">Selecionar PDF</button>
   </div>
 
   <!-- LOADING -->
   <div class="loading-bar" id="loadingBar"><div class="loading-bar-inner"></div></div>
-  <div class="loading-msg" id="loadingMsg">â³ Analisando atos publicados com IA...</div>
+  <div class="loading-msg" id="loadingMsg">⏳ Analisando atos publicados com IA...</div>
 
   <!-- ERRO -->
   <div class="error-box" id="errorBox">
-    <div class="error-title">âœ• Erro ao processar</div>
+    <div class="error-title">✕ Erro ao processar</div>
     <div class="error-msg" id="errorMsg"></div>
     <div class="error-hint" id="errorHint"></div>
   </div>
@@ -679,8 +679,8 @@ header {
 
     <!-- Alerta judicial -->
     <div class="alert alert-warn" id="alertJudicial" style="display:none">
-      <span class="alert-icon">âš ï¸</span>
-      <div>HÃ¡ <strong><span id="qtdJudicial">0</span> ato(s)</strong> com sentenÃ§a judicial nesta ediÃ§Ã£o. Verificar impacto financeiro antes do fechamento da folha.</div>
+      <span class="alert-icon">⚠️</span>
+      <div>Há <strong><span id="qtdJudicial">0</span> ato(s)</strong> com sentença judicial nesta edição. Verificar impacto financeiro antes do fechamento da folha.</div>
     </div>
 
     <!-- Progress -->
@@ -697,25 +697,25 @@ header {
     <!-- Stats -->
     <div class="stats-row" id="statsRow"></div>
 
-    <!-- SeÃ§Ãµes de atos -->
+    <!-- Seções de atos -->
     <div id="sectionsContainer"></div>
 
     <div class="divider"></div>
 
-    <!-- ObservaÃ§Ãµes -->
+    <!-- Observações -->
     <div class="section">
       <div class="section-header">
         <div class="section-dot" style="background:var(--info);box-shadow:0 0 6px var(--info)"></div>
-        <span class="section-title">ObservaÃ§Ãµes do Fechamento</span>
+        <span class="section-title">Observações do Fechamento</span>
       </div>
-      <textarea class="obs-area" id="obsGerais" placeholder="AnotaÃ§Ãµes adicionais para o fechamento da folha..."></textarea>
+      <textarea class="obs-area" id="obsGerais" placeholder="Anotações adicionais para o fechamento da folha..."></textarea>
     </div>
 
     <!-- Export -->
     <div class="export-row">
-      <span class="export-row-label">AÃ§Ãµes</span>
-      <button class="btn btn-primary" onclick="exportarRelatorio()">â¬‡ Exportar RelatÃ³rio</button>
-      <button class="btn btn-secondary" onclick="resetar()">â†º Nova EdiÃ§Ã£o</button>
+      <span class="export-row-label">Ações</span>
+      <button class="btn btn-primary" onclick="exportarRelatorio()">⬇ Exportar Relatório</button>
+      <button class="btn btn-secondary" onclick="resetar()">↺ Nova Edição</button>
     </div>
 
   </div>
@@ -723,20 +723,20 @@ header {
   <!-- EMPTY STATE -->
   <div id="emptyState">
     <div class="empty-state">
-      <span class="big-icon">ðŸ“‹</span>
-      <p>FaÃ§a upload do PDF do Diogrande para iniciar a consolidaÃ§Ã£o dos atos de pessoal.</p>
+      <span class="big-icon">📋</span>
+      <p>Faça upload do PDF do Diogrande para iniciar a consolidação dos atos de pessoal.</p>
     </div>
   </div>
 
 </div>
 
-<!-- â•â• JAVASCRIPT â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
+<!-- ══ JAVASCRIPT ═══════════════════════════════════════════ -->
 <script>
 const PROXY_URL = 'http://localhost:5000/api/proxy';
 
 let todosItens = [], verificados = new Set(), edicaoInfo = {};
 
-// â”€â”€â”€ DRAG & DROP â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── DRAG & DROP ─────────────────────────────────────────
 const uploadZone = document.getElementById('uploadZone');
 uploadZone.addEventListener('dragover', e => { e.preventDefault(); uploadZone.classList.add('drag-over'); });
 uploadZone.addEventListener('dragleave', () => uploadZone.classList.remove('drag-over'));
@@ -751,7 +751,7 @@ async function handleFile(e) {
   if (f) await processarPDF(f);
 }
 
-// â”€â”€â”€ PROCESSAMENTO â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── PROCESSAMENTO ────────────────────────────────────────
 async function processarPDF(file) {
   esconderErro();
   setLoading(true, 'Lendo PDF...');
@@ -761,55 +761,55 @@ async function processarPDF(file) {
     base64 = await fileToBase64(file);
   } catch(e) {
     setLoading(false);
-    mostrarErro('NÃ£o foi possÃ­vel ler o arquivo PDF.', e.message, '');
+    mostrarErro('Não foi possível ler o arquivo PDF.', e.message, '');
     return;
   }
 
-  setLoading(true, 'Enviando para anÃ¡lise via IA (Claude)...');
+  setLoading(true, 'Enviando para análise via IA (Claude)...');
 
-  const prompt = `VocÃª Ã© um assistente especializado em DiÃ¡rio Oficial Municipal (Diogrande de Campo Grande-MS).
+  const prompt = `Você é um assistente especializado em Diário Oficial Municipal (Diogrande de Campo Grande-MS).
 Analise este PDF e extraia TODOS os atos que impactam diretamente a FOLHA DE PAGAMENTO dos servidores municipais.
-Retorne SOMENTE um JSON vÃ¡lido, sem markdown, sem texto antes ou depois.
+Retorne SOMENTE um JSON válido, sem markdown, sem texto antes ou depois.
 
 REGRAS GERAIS:
-- Inclua TODOS os servidores, mesmo com mÃºltiplos registros na mesma ediÃ§Ã£o
-- judicial=true quando mencionar "SentenÃ§a Judicial", "Autos n.", "cumprimento Ã  SentenÃ§a" ou "determinaÃ§Ã£o judicial"
-- Para licencasSaude: inclua iniciais e prorrogaÃ§Ãµes como itens separados
-- Para leis e decretos: inclua apenas os que alteram salÃ¡rios, tabelas, benefÃ­cios ou direitos funcionais
-- Quando nÃ£o souber um campo, use null (nÃ£o invente)
+- Inclua TODOS os servidores, mesmo com múltiplos registros na mesma edição
+- judicial=true quando mencionar "Sentença Judicial", "Autos n.", "cumprimento à Sentença" ou "determinação judicial"
+- Para licencasSaude: inclua iniciais e prorrogações como itens separados
+- Para leis e decretos: inclua apenas os que alteram salários, tabelas, benefícios ou direitos funcionais
+- Quando não souber um campo, use null (não invente)
 
 {
   "edicao": { "numero": "8.265", "data": "23/03/2026" },
 
   "exoneracoes": [{ "servidor":"Nome","matricula":"123/01","cargo":"...","secretaria":"...","dataCom":"10/03/2026","judicial":false,"resolucao":"PE SEMADI n. 1.327" }],
 
-  "aposentadorias": [{ "servidor":"Nome","matricula":"...","cargo":"...","secretaria":"...","tipo":"voluntÃ¡ria|compulsÃ³ria|invalidez","dataCom":"...","judicial":false,"resolucao":"..." }],
+  "aposentadorias": [{ "servidor":"Nome","matricula":"...","cargo":"...","secretaria":"...","tipo":"voluntária|compulsória|invalidez","dataCom":"...","judicial":false,"resolucao":"..." }],
 
   "promocoes": [{ "servidor":"Nome","matricula":"...","cargo":"...","de":"Classe B","para":"Classe C","dataCom":"...","judicial":true,"resolucao":"..." }],
 
-  "progressoes": [{ "servidor":"Nome","matricula":"...","cargo":"...","de":"Ref. 10","para":"Ref. 11","tipo":"merecimento|titulaÃ§Ã£o|antiguidade","dataCom":"...","resolucao":"..." }],
+  "progressoes": [{ "servidor":"Nome","matricula":"...","cargo":"...","de":"Ref. 10","para":"Ref. 11","tipo":"merecimento|titulação|antiguidade","dataCom":"...","resolucao":"..." }],
 
   "estabilidades": [{ "servidor":"Nome","matricula":"...","cargo":"...","secretaria":"...","dataEstabilidade":"...","resolucao":"..." }],
 
   "abonosPermanencia": [{ "servidor":"Nome","matricula":"...","cargo":"...","secretaria":"...","dataEfeito":"...","judicial":true,"resolucao":"..." }],
 
-  "gratificacoes": [{ "servidor":"Nome","matricula":"...","cargo":"...","secretaria":"...","tipo":"FG|CD|GAEE|GATS|outra","descricao":"...","acao":"concessÃ£o|cassaÃ§Ã£o|revisÃ£o","dataEfeito":"...","judicial":false,"resolucao":"..." }],
+  "gratificacoes": [{ "servidor":"Nome","matricula":"...","cargo":"...","secretaria":"...","tipo":"FG|CD|GAEE|GATS|outra","descricao":"...","acao":"concessão|cassação|revisão","dataEfeito":"...","judicial":false,"resolucao":"..." }],
 
-  "designacoes": [{ "servidor":"Nome","matricula":"...","cargoOrigem":"...","cargoDesignado":"...","secretaria":"...","tipo":"substituiÃ§Ã£o|designaÃ§Ã£o","inicio":"...","termino":"...","resolucao":"..." }],
+  "designacoes": [{ "servidor":"Nome","matricula":"...","cargoOrigem":"...","cargoDesignado":"...","secretaria":"...","tipo":"substituição|designação","inicio":"...","termino":"...","resolucao":"..." }],
 
-  "adicional": [{ "servidor":"Nome","matricula":"...","cargo":"...","secretaria":"...","tipo":"insalubridade|periculosidade|noturno|magistÃ©rio","percentual":"...","acao":"concessÃ£o|cessaÃ§Ã£o","dataEfeito":"...","judicial":false,"resolucao":"..." }],
+  "adicional": [{ "servidor":"Nome","matricula":"...","cargo":"...","secretaria":"...","tipo":"insalubridade|periculosidade|noturno|magistério","percentual":"...","acao":"concessão|cessação","dataEfeito":"...","judicial":false,"resolucao":"..." }],
 
-  "reversoes": [{ "servidor":"Nome","matricula":"...","cargo":"...","secretaria":"...","tipo":"reversÃ£o|aproveitamento|reconduÃ§Ã£o","dataEfeito":"...","resolucao":"..." }],
+  "reversoes": [{ "servidor":"Nome","matricula":"...","cargo":"...","secretaria":"...","tipo":"reversão|aproveitamento|recondução","dataEfeito":"...","resolucao":"..." }],
 
   "readaptacoes": [{ "servidor":"Nome","matricula":"...","cargo":"...","lotacao":"...","inicio":"...","termino":"...","resolucao":"..." }],
 
-  "licencasSaude": [{ "servidor":"Nome","matricula":"...","cargo":"...","dias":30,"inicio":"01/02/2026","termino":"02/03/2026","tipo":"inicial|prorrogaÃ§Ã£o","resolucao":"..." }],
+  "licencasSaude": [{ "servidor":"Nome","matricula":"...","cargo":"...","dias":30,"inicio":"01/02/2026","termino":"02/03/2026","tipo":"inicial|prorrogação","resolucao":"..." }],
 
-  "licencasOutras": [{ "servidor":"Nome","matricula":"...","tipo":"acompanhar cÃ´njuge|prÃªmio|mandato classista|licenÃ§a sem vencimento|outra","inicio":"...","termino":"...","resolucao":"..." }],
+  "licencasOutras": [{ "servidor":"Nome","matricula":"...","tipo":"acompanhar cônjuge|prêmio|mandato classista|licença sem vencimento|outra","inicio":"...","termino":"...","resolucao":"..." }],
 
   "sentencasJudiciais": [{ "servidor":"Nome","matricula":"...","descricao":"...","valor":"...","secretaria":"...","autos":"...","resolucao":"..." }],
 
-  "legislacao": [{ "numero":"Lei 6.234/2026","tipo":"lei|decreto|portaria","ementa":"...","impacto":"reajuste salarial|novo benefÃ­cio|alteraÃ§Ã£o plano carreira|outro","dataPublicacao":"...","dataEfeito":"..." }],
+  "legislacao": [{ "numero":"Lei 6.234/2026","tipo":"lei|decreto|portaria","ementa":"...","impacto":"reajuste salarial|novo benefício|alteração plano carreira|outro","dataPublicacao":"...","dataEfeito":"..." }],
 
   "contratos": [{ "empresa":"Nome","objeto":"...","valor":"R$ 1.000,00","vigencia":"...","resolucao":"Contrato 55/2026","judicial":false }],
 
@@ -850,9 +850,9 @@ REGRAS GERAIS:
     setLoading(false);
     let hint = '';
     if (e.message.includes('Failed to fetch') || e.message.includes('NetworkError') || e.message.includes('ERR_CONNECTION_REFUSED')) {
-      hint = 'O servidor local nÃ£o estÃ¡ rodando.\nâ†’ Abra o terminal, entre na pasta do app e execute:\n  python servidor.py';
+      hint = 'O servidor local não está rodando.\n→ Abra o terminal, entre na pasta do app e execute:\n  python servidor.py';
     } else if (e.message.includes('API Key') || e.message.includes('401')) {
-      hint = 'Chave de API invÃ¡lida ou nÃ£o configurada.\nâ†’ Defina antes de iniciar o servidor:\n  Windows: set ANTHROPIC_API_KEY=sk-ant-...\n  Mac/Linux: export ANTHROPIC_API_KEY=sk-ant-...';
+      hint = 'Chave de API inválida ou não configurada.\n→ Defina antes de iniciar o servidor:\n  Windows: set ANTHROPIC_API_KEY=sk-ant-...\n  Mac/Linux: export ANTHROPIC_API_KEY=sk-ant-...';
     } else if (e.message.includes('JSON')) {
       hint = 'A IA retornou uma resposta inesperada. Tente novamente.';
     }
@@ -860,64 +860,64 @@ REGRAS GERAIS:
   }
 }
 
-// â”€â”€â”€ RENDER â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── RENDER ──────────────────────────────────────────────
 function renderPainel(data) {
   setLoading(false);
   edicaoInfo = data.edicao || {};
-  document.getElementById('editionBadge').textContent = `EdiÃ§Ã£o ${edicaoInfo.numero || 'â€”'} Â· ${edicaoInfo.data || 'â€”'}`;
+  document.getElementById('editionBadge').textContent = `Edição ${edicaoInfo.numero || '—'} · ${edicaoInfo.data || '—'}`;
 
   todosItens = []; verificados = new Set();
   const container = document.getElementById('sectionsContainer');
   container.innerHTML = '';
 
   const secoes = [
-    { key:'exoneracoes', titulo:'ExoneraÃ§Ãµes / DemissÃµes', cor:'#F15B5B', sec:'exo', icon:'ðŸšª',
-      fn:(it,i)=>itemCard(it,i,'exo',[{label:it.cargo},{label:it.secretaria},{label:it.dataCom?`A partir de ${it.dataCom}`:null},{label:it.resolucao,type:'gray'},it.judicial?{label:'SENTENÃ‡A JUDICIAL',type:'red'}:null]) },
-    { key:'aposentadorias', titulo:'Aposentadorias', cor:'#C084FC', sec:'apo', icon:'ðŸ…',
-      fn:(it,i)=>itemCard(it,i,'apo',[{label:it.cargo},{label:it.secretaria},{label:it.tipo,type:'blue'},{label:it.dataCom?`A partir de ${it.dataCom}`:null},{label:it.resolucao,type:'gray'},it.judicial?{label:'SENTENÃ‡A JUDICIAL',type:'red'}:null]) },
-    { key:'promocoes', titulo:'PromoÃ§Ãµes / ProgressÃµes de Classe', cor:'#4ECDC4', sec:'pro', icon:'â¬†',
-      fn:(it,i)=>itemCard(it,i,'pro',[{label:it.cargo},{label:`${it.de} â†’ ${it.para}`,type:'green'},{label:it.dataCom?`Efeito: ${it.dataCom}`:null},{label:it.resolucao,type:'gray'},it.judicial?{label:'SENTENÃ‡A JUDICIAL',type:'red'}:null]) },
-    { key:'progressoes', titulo:'ProgressÃµes de ReferÃªncia', cor:'#34D399', sec:'prg', icon:'ðŸ“ˆ',
-      fn:(it,i)=>itemCard(it,i,'prg',[{label:it.cargo},{label:`${it.de} â†’ ${it.para}`,type:'green'},{label:it.tipo,type:'blue'},{label:it.dataCom?`Efeito: ${it.dataCom}`:null},{label:it.resolucao,type:'gray'}]) },
-    { key:'gratificacoes', titulo:'GratificaÃ§Ãµes / FunÃ§Ãµes Gratificadas', cor:'#FBBF24', sec:'gra', icon:'ðŸ’°',
-      fn:(it,i)=>itemCard(it,i,'gra',[{label:it.cargo},{label:it.secretaria},{label:it.tipo,type:'yellow'},{label:it.descricao},{label:it.acao==='concessÃ£o'?'CONCESSÃƒO':it.acao==='cassaÃ§Ã£o'?'CASSAÃ‡ÃƒO':'REVISÃƒO',type:it.acao==='cassaÃ§Ã£o'?'red':it.acao==='concessÃ£o'?'green':'yellow'},{label:it.dataEfeito?`Efeito: ${it.dataEfeito}`:null},{label:it.resolucao,type:'gray'},it.judicial?{label:'SENTENÃ‡A JUDICIAL',type:'red'}:null]) },
-    { key:'designacoes', titulo:'DesignaÃ§Ãµes / SubstituiÃ§Ãµes', cor:'#F97316', sec:'des', icon:'ðŸŽ¯',
-      fn:(it,i)=>itemCard(it,i,'des',[{label:it.cargoOrigem},{label:it.cargoDesignado,type:'yellow'},{label:it.secretaria},{label:it.tipo,type:'blue'},{label:(it.inicio&&it.termino)?`${it.inicio} â†’ ${it.termino}`:null},{label:it.resolucao,type:'gray'}]) },
-    { key:'adicional', titulo:'Adicionais (Insalubridade / Periculosidade)', cor:'#FB923C', sec:'adi', icon:'âš ',
-      fn:(it,i)=>itemCard(it,i,'adi',[{label:it.cargo},{label:it.secretaria},{label:it.tipo,type:'yellow'},{label:it.percentual?`${it.percentual}%`:null},{label:it.acao==='concessÃ£o'?'CONCESSÃƒO':'CESSAÃ‡ÃƒO',type:it.acao==='cessaÃ§Ã£o'?'red':'green'},{label:it.dataEfeito?`Efeito: ${it.dataEfeito}`:null},{label:it.resolucao,type:'gray'},it.judicial?{label:'SENTENÃ‡A JUDICIAL',type:'red'}:null]) },
-    { key:'estabilidades', titulo:'DeclaraÃ§Ãµes de Estabilidade', cor:'#6C8EFF', sec:'est', icon:'ðŸ”’',
-      fn:(it,i)=>itemCard(it,i,'est',[{label:it.cargo},{label:it.secretaria},{label:it.dataEstabilidade?`EstÃ¡vel desde: ${it.dataEstabilidade}`:null,type:'blue'},{label:it.resolucao,type:'gray'}]) },
-    { key:'abonosPermanencia', titulo:'Abonos de PermanÃªncia', cor:'#FFD166', sec:'abo', icon:'ðŸ“Œ',
-      fn:(it,i)=>itemCard(it,i,'abo',[{label:it.cargo},{label:it.secretaria},{label:it.dataEfeito?`Efeito: ${it.dataEfeito}`:null,type:'yellow'},{label:it.resolucao,type:'gray'},it.judicial?{label:'SENTENÃ‡A JUDICIAL',type:'red'}:null]) },
-    { key:'reversoes', titulo:'ReversÃµes / Aproveitamentos / ReconduÃ§Ãµes', cor:'#A78BFA', sec:'rev', icon:'ðŸ”',
+    { key:'exoneracoes', titulo:'Exonerações / Demissões', cor:'#F15B5B', sec:'exo', icon:'🚪',
+      fn:(it,i)=>itemCard(it,i,'exo',[{label:it.cargo},{label:it.secretaria},{label:it.dataCom?`A partir de ${it.dataCom}`:null},{label:it.resolucao,type:'gray'},it.judicial?{label:'SENTENÇA JUDICIAL',type:'red'}:null]) },
+    { key:'aposentadorias', titulo:'Aposentadorias', cor:'#C084FC', sec:'apo', icon:'🏅',
+      fn:(it,i)=>itemCard(it,i,'apo',[{label:it.cargo},{label:it.secretaria},{label:it.tipo,type:'blue'},{label:it.dataCom?`A partir de ${it.dataCom}`:null},{label:it.resolucao,type:'gray'},it.judicial?{label:'SENTENÇA JUDICIAL',type:'red'}:null]) },
+    { key:'promocoes', titulo:'Promoções / Progressões de Classe', cor:'#4ECDC4', sec:'pro', icon:'⬆',
+      fn:(it,i)=>itemCard(it,i,'pro',[{label:it.cargo},{label:`${it.de} → ${it.para}`,type:'green'},{label:it.dataCom?`Efeito: ${it.dataCom}`:null},{label:it.resolucao,type:'gray'},it.judicial?{label:'SENTENÇA JUDICIAL',type:'red'}:null]) },
+    { key:'progressoes', titulo:'Progressões de Referência', cor:'#34D399', sec:'prg', icon:'📈',
+      fn:(it,i)=>itemCard(it,i,'prg',[{label:it.cargo},{label:`${it.de} → ${it.para}`,type:'green'},{label:it.tipo,type:'blue'},{label:it.dataCom?`Efeito: ${it.dataCom}`:null},{label:it.resolucao,type:'gray'}]) },
+    { key:'gratificacoes', titulo:'Gratificações / Funções Gratificadas', cor:'#FBBF24', sec:'gra', icon:'💰',
+      fn:(it,i)=>itemCard(it,i,'gra',[{label:it.cargo},{label:it.secretaria},{label:it.tipo,type:'yellow'},{label:it.descricao},{label:it.acao==='concessão'?'CONCESSÃO':it.acao==='cassação'?'CASSAÇÃO':'REVISÃO',type:it.acao==='cassação'?'red':it.acao==='concessão'?'green':'yellow'},{label:it.dataEfeito?`Efeito: ${it.dataEfeito}`:null},{label:it.resolucao,type:'gray'},it.judicial?{label:'SENTENÇA JUDICIAL',type:'red'}:null]) },
+    { key:'designacoes', titulo:'Designações / Substituições', cor:'#F97316', sec:'des', icon:'🎯',
+      fn:(it,i)=>itemCard(it,i,'des',[{label:it.cargoOrigem},{label:it.cargoDesignado,type:'yellow'},{label:it.secretaria},{label:it.tipo,type:'blue'},{label:(it.inicio&&it.termino)?`${it.inicio} → ${it.termino}`:null},{label:it.resolucao,type:'gray'}]) },
+    { key:'adicional', titulo:'Adicionais (Insalubridade / Periculosidade)', cor:'#FB923C', sec:'adi', icon:'⚠',
+      fn:(it,i)=>itemCard(it,i,'adi',[{label:it.cargo},{label:it.secretaria},{label:it.tipo,type:'yellow'},{label:it.percentual?`${it.percentual}%`:null},{label:it.acao==='concessão'?'CONCESSÃO':'CESSAÇÃO',type:it.acao==='cessação'?'red':'green'},{label:it.dataEfeito?`Efeito: ${it.dataEfeito}`:null},{label:it.resolucao,type:'gray'},it.judicial?{label:'SENTENÇA JUDICIAL',type:'red'}:null]) },
+    { key:'estabilidades', titulo:'Declarações de Estabilidade', cor:'#6C8EFF', sec:'est', icon:'🔒',
+      fn:(it,i)=>itemCard(it,i,'est',[{label:it.cargo},{label:it.secretaria},{label:it.dataEstabilidade?`Estável desde: ${it.dataEstabilidade}`:null,type:'blue'},{label:it.resolucao,type:'gray'}]) },
+    { key:'abonosPermanencia', titulo:'Abonos de Permanência', cor:'#FFD166', sec:'abo', icon:'📌',
+      fn:(it,i)=>itemCard(it,i,'abo',[{label:it.cargo},{label:it.secretaria},{label:it.dataEfeito?`Efeito: ${it.dataEfeito}`:null,type:'yellow'},{label:it.resolucao,type:'gray'},it.judicial?{label:'SENTENÇA JUDICIAL',type:'red'}:null]) },
+    { key:'reversoes', titulo:'Reversões / Aproveitamentos / Reconduções', cor:'#A78BFA', sec:'rev', icon:'🔁',
       fn:(it,i)=>itemCard(it,i,'rev',[{label:it.cargo},{label:it.secretaria},{label:it.tipo,type:'blue'},{label:it.dataEfeito?`Efeito: ${it.dataEfeito}`:null},{label:it.resolucao,type:'gray'}]) },
-    { key:'readaptacoes', titulo:'ReadaptaÃ§Ãµes', cor:'#a87ee8', sec:'rea', icon:'ðŸ”„',
-      fn:(it,i)=>itemCard(it,i,'rea',[{label:it.cargo},{label:it.lotacao},{label:(it.inicio&&it.termino)?`${it.inicio} â†’ ${it.termino}`:null},{label:it.resolucao,type:'gray'}]) },
-    { key:'licencasSaude', titulo:'LicenÃ§as para Tratamento de SaÃºde', cor:'#505068', sec:'ls', icon:'ðŸ¥',
-      fn:(it,i)=>itemCard(it,i,'ls',[{label:it.cargo},{label:it.tipo==='inicial'?'INICIAL':'PRORROGAÃ‡ÃƒO',type:it.tipo==='inicial'?'blue':'yellow'},{label:`${it.dias} dias Â· ${it.inicio} â†’ ${it.termino}`},{label:it.resolucao,type:'gray'}]) },
-    { key:'licencasOutras', titulo:'LicenÃ§as Especiais', cor:'#6C8EFF', sec:'lic', icon:'ðŸ“‹',
-      fn:(it,i)=>itemCard(it,i,'lic',[{label:it.tipo,type:'blue'},{label:(it.inicio&&it.termino)?`${it.inicio} â†’ ${it.termino}`:null},{label:it.resolucao,type:'gray'}]) },
-    { key:'sentencasJudiciais', titulo:'SentenÃ§as Judiciais', cor:'#EF4444', sec:'sen', icon:'âš–',
-      fn:(it,i)=>{const id=`sen_${i}`;todosItens.push(id);return`<div class="item-card" id="card_${id}" data-section="sen"><div><div class="item-name">${it.servidor||'â€”'}</div><div class="item-detail">${it.matricula?`mat. ${it.matricula}`:''}</div><div class="item-meta"><span class="tag tag-red">SENTENÃ‡A JUDICIAL</span>${it.autos?`<span class="tag tag-gray">Autos: ${it.autos}</span>`:''} ${it.valor?`<span class="tag tag-yellow">${it.valor}</span>`:''} ${it.secretaria?`<span class="tag tag-gray">${it.secretaria}</span>`:''} ${it.resolucao?`<span class="tag tag-gray">${it.resolucao}</span>`:''}</div>${it.descricao?`<div class="item-detail" style="margin-top:5px">${it.descricao}</div>`:''}</div><button class="check-btn" onclick="toggleCheck('${id}')">âœ“</button></div>`;} },
-    { key:'legislacao', titulo:'LegislaÃ§Ã£o com Impacto na Folha', cor:'#E879F9', sec:'leg', icon:'ðŸ“œ',
-      fn:(it,i)=>{const id=`leg_${i}`;todosItens.push(id);return`<div class="item-card" id="card_${id}" data-section="leg"><div><div class="item-name">${it.numero||'â€”'}</div><div class="item-detail">${it.ementa||''}</div><div class="item-meta"><span class="tag tag-blue">${it.tipo||''}</span><span class="tag tag-yellow">${it.impacto||''}</span>${it.dataEfeito?`<span class="tag tag-gray">Efeito: ${it.dataEfeito}</span>`:''}</div></div><button class="check-btn" onclick="toggleCheck('${id}')">âœ“</button></div>`;} },
-    { key:'contratos', titulo:'Contratos / Aditivos', cor:'#F15B5B', sec:'cont', icon:'ðŸ“„',
-      fn:(it,i)=>{const id=`cont_${i}`;todosItens.push(id);return`<div class="item-card" id="card_${id}" data-section="cont"><div><div class="item-name">${it.empresa||'â€”'}</div><div class="item-detail">${it.objeto||''}</div><div class="item-meta"><span class="tag tag-yellow">${it.resolucao||''}</span>${it.valor?`<span class="tag tag-gray">${it.valor}</span>`:''} ${it.vigencia?`<span class="tag tag-gray">${it.vigencia}</span>`:''} ${it.judicial?'<span class="tag tag-red">SENTENÃ‡A JUDICIAL</span>':''}</div></div><button class="check-btn" onclick="toggleCheck('${id}')">âœ“</button></div>`;} },
-    { key:'contratacoes', titulo:'ConvocaÃ§Ãµes / ContrataÃ§Ãµes', cor:'#FF8080', sec:'conv', icon:'ðŸ“¥',
-      fn:(it,i)=>{const id=`conv_${i}`;todosItens.push(id);return`<div class="item-card" id="card_${id}" data-section="conv"><div><div class="item-name">${it.candidato||'â€”'}</div><div class="item-detail">${it.funcao||''}</div><div class="item-meta"><span class="tag tag-yellow">${it.edital||''}</span>${it.data?`<span class="tag tag-gray">${it.data}</span>`:''}</div></div><button class="check-btn" onclick="toggleCheck('${id}')">âœ“</button></div>`;} },
+    { key:'readaptacoes', titulo:'Readaptações', cor:'#a87ee8', sec:'rea', icon:'🔄',
+      fn:(it,i)=>itemCard(it,i,'rea',[{label:it.cargo},{label:it.lotacao},{label:(it.inicio&&it.termino)?`${it.inicio} → ${it.termino}`:null},{label:it.resolucao,type:'gray'}]) },
+    { key:'licencasSaude', titulo:'Licenças para Tratamento de Saúde', cor:'#505068', sec:'ls', icon:'🏥',
+      fn:(it,i)=>itemCard(it,i,'ls',[{label:it.cargo},{label:it.tipo==='inicial'?'INICIAL':'PRORROGAÇÃO',type:it.tipo==='inicial'?'blue':'yellow'},{label:`${it.dias} dias · ${it.inicio} → ${it.termino}`},{label:it.resolucao,type:'gray'}]) },
+    { key:'licencasOutras', titulo:'Licenças Especiais', cor:'#6C8EFF', sec:'lic', icon:'📋',
+      fn:(it,i)=>itemCard(it,i,'lic',[{label:it.tipo,type:'blue'},{label:(it.inicio&&it.termino)?`${it.inicio} → ${it.termino}`:null},{label:it.resolucao,type:'gray'}]) },
+    { key:'sentencasJudiciais', titulo:'Sentenças Judiciais', cor:'#EF4444', sec:'sen', icon:'⚖',
+      fn:(it,i)=>{const id=`sen_${i}`;todosItens.push(id);return`<div class="item-card" id="card_${id}" data-section="sen"><div><div class="item-name">${it.servidor||'—'}</div><div class="item-detail">${it.matricula?`mat. ${it.matricula}`:''}</div><div class="item-meta"><span class="tag tag-red">SENTENÇA JUDICIAL</span>${it.autos?`<span class="tag tag-gray">Autos: ${it.autos}</span>`:''} ${it.valor?`<span class="tag tag-yellow">${it.valor}</span>`:''} ${it.secretaria?`<span class="tag tag-gray">${it.secretaria}</span>`:''} ${it.resolucao?`<span class="tag tag-gray">${it.resolucao}</span>`:''}</div>${it.descricao?`<div class="item-detail" style="margin-top:5px">${it.descricao}</div>`:''}</div><button class="check-btn" onclick="toggleCheck('${id}')">✓</button></div>`;} },
+    { key:'legislacao', titulo:'Legislação com Impacto na Folha', cor:'#E879F9', sec:'leg', icon:'📜',
+      fn:(it,i)=>{const id=`leg_${i}`;todosItens.push(id);return`<div class="item-card" id="card_${id}" data-section="leg"><div><div class="item-name">${it.numero||'—'}</div><div class="item-detail">${it.ementa||''}</div><div class="item-meta"><span class="tag tag-blue">${it.tipo||''}</span><span class="tag tag-yellow">${it.impacto||''}</span>${it.dataEfeito?`<span class="tag tag-gray">Efeito: ${it.dataEfeito}</span>`:''}</div></div><button class="check-btn" onclick="toggleCheck('${id}')">✓</button></div>`;} },
+    { key:'contratos', titulo:'Contratos / Aditivos', cor:'#F15B5B', sec:'cont', icon:'📄',
+      fn:(it,i)=>{const id=`cont_${i}`;todosItens.push(id);return`<div class="item-card" id="card_${id}" data-section="cont"><div><div class="item-name">${it.empresa||'—'}</div><div class="item-detail">${it.objeto||''}</div><div class="item-meta"><span class="tag tag-yellow">${it.resolucao||''}</span>${it.valor?`<span class="tag tag-gray">${it.valor}</span>`:''} ${it.vigencia?`<span class="tag tag-gray">${it.vigencia}</span>`:''} ${it.judicial?'<span class="tag tag-red">SENTENÇA JUDICIAL</span>':''}</div></div><button class="check-btn" onclick="toggleCheck('${id}')">✓</button></div>`;} },
+    { key:'contratacoes', titulo:'Convocações / Contratações', cor:'#FF8080', sec:'conv', icon:'📥',
+      fn:(it,i)=>{const id=`conv_${i}`;todosItens.push(id);return`<div class="item-card" id="card_${id}" data-section="conv"><div><div class="item-name">${it.candidato||'—'}</div><div class="item-detail">${it.funcao||''}</div><div class="item-meta"><span class="tag tag-yellow">${it.edital||''}</span>${it.data?`<span class="tag tag-gray">${it.data}</span>`:''}</div></div><button class="check-btn" onclick="toggleCheck('${id}')">✓</button></div>`;} },
   ];
 
   const statsMap = [
-    {key:'exoneracoes',      label:'ExoneraÃ§Ãµes',   cor:'#F15B5B'},
+    {key:'exoneracoes',      label:'Exonerações',   cor:'#F15B5B'},
     {key:'aposentadorias',   label:'Aposent.',      cor:'#C084FC'},
-    {key:'promocoes',        label:'PromoÃ§Ãµes',     cor:'#4ECDC4'},
-    {key:'progressoes',      label:'ProgressÃµes',   cor:'#34D399'},
-    {key:'gratificacoes',    label:'GratificaÃ§Ãµes', cor:'#FBBF24'},
-    {key:'designacoes',      label:'DesignaÃ§Ãµes',   cor:'#F97316'},
+    {key:'promocoes',        label:'Promoções',     cor:'#4ECDC4'},
+    {key:'progressoes',      label:'Progressões',   cor:'#34D399'},
+    {key:'gratificacoes',    label:'Gratificações', cor:'#FBBF24'},
+    {key:'designacoes',      label:'Designações',   cor:'#F97316'},
     {key:'adicional',        label:'Adicionais',    cor:'#FB923C'},
     {key:'sentencasJudiciais',label:'Judiciais',    cor:'#EF4444'},
-    {key:'legislacao',       label:'LegislaÃ§Ã£o',    cor:'#E879F9'},
-    {key:'licencasSaude',    label:'Lic. SaÃºde',    cor:'#505068'},
+    {key:'legislacao',       label:'Legislação',    cor:'#E879F9'},
+    {key:'licencasSaude',    label:'Lic. Saúde',    cor:'#505068'},
   ];
   document.getElementById('statsRow').innerHTML = statsMap.map(s=>`
     <div class="stat-card">
@@ -945,8 +945,8 @@ function renderPainel(data) {
   }
   container.innerHTML = html || `
     <div class="empty-state">
-      <span class="big-icon">âœ…</span>
-      <p>Nenhum ato de pessoal encontrado nesta ediÃ§Ã£o.</p>
+      <span class="big-icon">✅</span>
+      <p>Nenhum ato de pessoal encontrado nesta edição.</p>
     </div>`;
 
   document.getElementById('mainPanel').style.display = 'block';
@@ -957,7 +957,7 @@ function renderPainel(data) {
 function itemCard(item, idx, prefix, tags) {
   const id = `${prefix}_${idx}`;
   todosItens.push(id);
-  const nome = item.servidor || item.candidato || 'â€”';
+  const nome = item.servidor || item.candidato || '—';
   const mat = item.matricula ? `mat. ${item.matricula}` : '';
   const tagsHtml = tags.filter(Boolean).filter(t=>t.label).map(t=>`<span class="tag tag-${t.type||'gray'}">${t.label}</span>`).join('');
   return `<div class="item-card" id="card_${id}" data-section="${prefix}">
@@ -966,7 +966,7 @@ function itemCard(item, idx, prefix, tags) {
       ${mat ? `<div class="item-detail">${mat}</div>` : ''}
       ${tagsHtml ? `<div class="item-meta">${tagsHtml}</div>` : ''}
     </div>
-    <button class="check-btn" onclick="toggleCheck('${id}')">âœ“</button>
+    <button class="check-btn" onclick="toggleCheck('${id}')">✓</button>
   </div>`;
 }
 
@@ -996,10 +996,10 @@ function exportarRelatorio() {
   document.querySelectorAll('.item-card').forEach(card => {
     const nome = card.querySelector('.item-name')?.textContent || '';
     const tags = [...card.querySelectorAll('.tag')].map(t => t.textContent).join(' | ');
-    const ok = card.classList.contains('checked') ? '[âœ“]' : '[ ]';
-    linhas.push(`${ok} ${nome} â€” ${tags}`);
+    const ok = card.classList.contains('checked') ? '[✓]' : '[ ]';
+    linhas.push(`${ok} ${nome} — ${tags}`);
   });
-  const texto = `RELATÃ“RIO DE FECHAMENTO DE FOLHA â€” SEMADI\nEdiÃ§Ã£o: ${edicaoInfo.numero} Â· ${edicaoInfo.data}\nGerado em: ${agora}\nProgresso: ${verificados.size}/${todosItens.length} atos verificados\n\n${'='.repeat(60)}\n${linhas.join('\n')}\n\n${'='.repeat(60)}\nOBSERVAÃ‡Ã•ES\n${'='.repeat(60)}\n${obs || '(nenhuma)'}`;
+  const texto = `RELATÓRIO DE FECHAMENTO DE FOLHA — SEMADI\nEdição: ${edicaoInfo.numero} · ${edicaoInfo.data}\nGerado em: ${agora}\nProgresso: ${verificados.size}/${todosItens.length} atos verificados\n\n${'='.repeat(60)}\n${linhas.join('\n')}\n\n${'='.repeat(60)}\nOBSERVAÇÕES\n${'='.repeat(60)}\n${obs || '(nenhuma)'}`;
   const a = document.createElement('a');
   a.href = URL.createObjectURL(new Blob([texto], { type: 'text/plain;charset=utf-8' }));
   a.download = `folha_${(edicaoInfo.numero||'').replace('.','')}_${(edicaoInfo.data||'').replace(/\//g,'-')}.txt`;
@@ -1010,7 +1010,7 @@ function resetar() {
   document.getElementById('mainPanel').style.display = 'none';
   document.getElementById('emptyState').style.display = 'block';
   document.getElementById('alertJudicial').style.display = 'none';
-  document.getElementById('editionBadge').textContent = 'Nenhuma ediÃ§Ã£o carregada';
+  document.getElementById('editionBadge').textContent = 'Nenhuma edição carregada';
   document.getElementById('fileInput').value = '';
   esconderErro();
   todosItens = []; verificados = new Set();
@@ -1030,7 +1030,7 @@ function setLoading(on, msg) {
   document.getElementById('loadingBar').classList.toggle('active', on);
   const lm = document.getElementById('loadingMsg');
   lm.classList.toggle('active', on);
-  if (msg) lm.textContent = 'â³ ' + msg;
+  if (msg) lm.textContent = '⏳ ' + msg;
 }
 
 function fileToBase64(file) {
