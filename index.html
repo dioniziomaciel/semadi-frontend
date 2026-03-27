@@ -1119,7 +1119,7 @@ function fileToBase64(file) {
 let dadosAtuais = null;
 
 // URL do Google Apps Script (fixa — não precisa configurar)
-const SHEETS_URL = 'https://script.google.com/macros/s/AKfycbxEXBGEVY78jSYJ8kD3LPvm7Ti2BwAcsXbpa1xdNXoQJhicyDbvUVrCMkNNYV5_zH-bQg/exec';
+const SHEETS_URL = 'https://script.google.com/macros/s/AKfycbxfRtWjqVPJbNWhnobcHATqnpIzXtBq7hQgx7Pm5Mzpz4idUWVNzjDHUysywfESCvbwJQ/exec';
 
 window.addEventListener('DOMContentLoaded', () => {
   document.getElementById('sheetsUrl').value = SHEETS_URL;
@@ -1193,7 +1193,6 @@ async function salvarNoSheets(forcar = false) {
     const json = await resp.json();
 
     if (json.status === 'duplicata') {
-      // Mostrar modal de confirmação
       btn.disabled = false;
       statusEl.style.display = 'none';
       mostrarModalDuplicata(json.msg);
@@ -1201,8 +1200,8 @@ async function salvarNoSheets(forcar = false) {
     }
 
     if (json.status === 'ok') {
-      statusEl.textContent = '✓ Salvo no Sheets!';
-      statusEl.className = 'sheets-status ok';
+      statusEl.style.display = 'none';
+      mostrarModalSucesso(json.abaLink, json.abaNome, json.planilhaLink);
     } else {
       throw new Error(json.msg || 'Erro desconhecido');
     }
@@ -1213,6 +1212,39 @@ async function salvarNoSheets(forcar = false) {
     btn.disabled = false;
     setTimeout(() => { statusEl.style.display = 'none'; }, 5000);
   }
+}
+
+function mostrarModalSucesso(abaLink, abaNome, planilhaLink) {
+  document.getElementById('modalSucesso')?.remove();
+  const modal = document.createElement('div');
+  modal.id = 'modalSucesso';
+  modal.style.cssText = `position:fixed;inset:0;background:rgba(0,0,0,.7);display:flex;align-items:center;justify-content:center;z-index:9999;`;
+  modal.innerHTML = `
+    <div style="background:#0D2220;border:1px solid #1A3E3C;border-radius:14px;padding:28px 28px 22px;max-width:440px;width:90%;box-shadow:0 8px 40px rgba(0,0,0,.6)">
+      <div style="font-size:28px;margin-bottom:10px">✅</div>
+      <div style="font-size:14px;font-weight:800;color:#4ECDC4;letter-spacing:.05em;text-transform:uppercase;margin-bottom:8px">Salvo com sucesso!</div>
+      <div style="font-size:13px;color:#9090B0;line-height:1.6;margin-bottom:20px">
+        Aba criada: <strong style="color:#F0EFFF">${abaNome||'nova aba'}</strong><br>
+        Os dados foram salvos na planilha da SEMADI.
+      </div>
+      <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:20px">
+        ${abaLink ? `<a href="${abaLink}" target="_blank" style="display:flex;align-items:center;gap:8px;background:#0f9d5820;border:1px solid #0f9d5840;border-radius:8px;padding:11px 14px;color:#4ECDC4;text-decoration:none;font-size:13px;font-weight:700">
+          <span style="font-size:16px">📊</span> Abrir aba desta edição →
+        </a>` : ''}
+        ${planilhaLink ? `<a href="${planilhaLink}" target="_blank" style="display:flex;align-items:center;gap:8px;background:#1a1a2e;border:1px solid #32324A;border-radius:8px;padding:11px 14px;color:#9090B0;text-decoration:none;font-size:13px;font-weight:600">
+          <span style="font-size:16px">📋</span> Abrir planilha completa →
+        </a>` : ''}
+      </div>
+      <div style="display:flex;justify-content:flex-end">
+        <button onclick="document.getElementById('modalSucesso').remove()"
+          style="background:#252540;color:#9090B0;border:1px solid #32324A;border-radius:8px;padding:9px 20px;font-family:inherit;font-size:13px;font-weight:700;cursor:pointer">
+          Fechar
+        </button>
+      </div>
+    </div>
+  `;
+  document.body.appendChild(modal);
+  modal.addEventListener('click', e => { if (e.target === modal) modal.remove(); });
 }
 
 function mostrarModalDuplicata(msg) {
