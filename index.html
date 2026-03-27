@@ -1118,17 +1118,11 @@ function fileToBase64(file) {
 // ─── GOOGLE SHEETS ────────────────────────────────────────
 let dadosAtuais = null;
 
-// Carregar URL salva do localStorage
-window.addEventListener('DOMContentLoaded', () => {
-  const savedUrl = localStorage.getItem('semadi_sheets_url');
-  if (savedUrl) document.getElementById('sheetsUrl').value = savedUrl;
-});
+// URL do Google Apps Script (fixa — não precisa configurar)
+const SHEETS_URL = 'https://script.google.com/macros/s/AKfycbxEXBGEVY78jSYJ8kD3LPvm7Ti2BwAcsXbpa1xdNXoQJhicyDbvUVrCMkNNYV5_zH-bQg/exec';
 
-// Salvar URL no localStorage quando alterar
-document.addEventListener('DOMContentLoaded', () => {
-  document.getElementById('sheetsUrl').addEventListener('change', (e) => {
-    localStorage.setItem('semadi_sheets_url', e.target.value.trim());
-  });
+window.addEventListener('DOMContentLoaded', () => {
+  document.getElementById('sheetsUrl').value = SHEETS_URL;
 });
 
 async function salvarNoSheets(forcar = false) {
