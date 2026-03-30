@@ -824,6 +824,8 @@ async function handleFile(e) {
 }
 
 // ─── PROCESSAMENTO ────────────────────────────────────────
+const LIMITE_TOKENS = 180000; // margem segura abaixo de 200k
+
 async function processarPDF(file) {
   esconderErro();
   setLoading(true, 'Lendo PDF...');
@@ -837,8 +839,128 @@ async function processarPDF(file) {
     return;
   }
 
-  setLoading(true, 'Enviando para análise via IA (Claude)...');
+  // Estimar tamanho em tokens (base64 → bytes → tokens ~4 chars/token)
+  const bytesEstimado = base64.length * 0.75;
+  const tokensEstimado = Math.round(bytesEstimado / 4);
 
+  if (tokensEstimado > LIMITE_TOKENS) {
+    // PDF grande → dividir em partes usando PDF.js
+    setLoading(true, `PDF grande (~${Math.round(tokensEstimado/1000)}k tokens). Dividindo em partes...`);
+    await processarPDFGrande(file, base64, tokensEstimado);
+  } else {
+    // PDF normal → processar direto
+    await chamarAPI(base64, 1, 1);
+  }
+}
+
+async function processarPDFGrande(file, base64Full, tokensTotal) {
+  // Carregar PDF.js para dividir o PDF por páginas
+  if (!window.pdfjsLib) {
+    await new Promise((res, rej) => {
+      const s = document.createElement('script');
+      s.src = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js';
+      s.onload = res; s.onerror = rej;
+      document.head.appendChild(s);
+    });
+    window.pdfjsLib.GlobalWorkerOptions.workerSrc =
+      'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+  }
+
+  // Carregar o PDF e descobrir quantas páginas tem
+  const arrayBuffer = await file.arrayBuffer();
+  const pdfDoc = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
+  const totalPaginas = pdfDoc.numPages;
+
+  // Calcular quantas partes precisamos
+  const numPartes = Math.ceil(tokensTotal / LIMITE_TOKENS);
+  const paginasPorParte = Math.ceil(totalPaginas / numPartes);
+
+  setLoading(true, `Dividindo ${totalPaginas} páginas em ${numPartes} partes para análise...`);
+
+  // Dividir o PDF em partes usando PDF.js + recriar cada parte como base64
+  const resultados = [];
+  for (let parte = 0; parte < numPartes; parte++) {
+    const inicio = parte * paginasPorParte + 1;
+    const fim = Math.min((parte + 1) * paginasPorParte, totalPaginas);
+
+    setLoading(true, `Analisando parte ${parte + 1} de ${numPartes} (páginas ${inicio}–${fim})...`);
+
+    // Extrair texto das páginas desta parte para criar um "documento" menor
+    let textoParte = '';
+    for (let p = inicio; p <= fim; p++) {
+      const page = await pdfDoc.getPage(p);
+      const content = await page.getTextContent();
+      textoParte += content.items.map(i => i.str).join(' ') + '\n';
+    }
+
+    // Enviar como texto (não PDF) para a API
+    const resultado = await chamarAPITexto(textoParte, parte + 1, numPartes);
+    if (resultado) resultados.push(resultado);
+  }
+
+  // Combinar todos os resultados
+  if (resultados.length > 0) {
+    const combinado = combinarResultados(resultados);
+    renderPainel(combinado);
+  } else {
+    setLoading(false);
+    mostrarErro('Falha ao processar o PDF.', 'Nenhuma parte retornou resultado válido.', '');
+  }
+}
+
+function combinarResultados(resultados) {
+  const base = resultados[0];
+  for (let i = 1; i < resultados.length; i++) {
+    const r = resultados[i];
+    const chaves = ['exoneracoes','aposentadorias','promocoes','progressoes','estabilidades','abonosPermanencia','gratificacoes','designacoes','adicional','reversoes','readaptacoes','licencasSaude','licencasOutras','sentencasJudiciais','legislacao','contratos','contratacoes'];
+    for (const chave of chaves) {
+      if (r[chave]?.length) {
+        base[chave] = [...(base[chave] || []), ...r[chave]];
+      }
+    }
+    base.totaisJudiciais = (base.totaisJudiciais || 0) + (r.totaisJudiciais || 0);
+  }
+  return base;
+}
+
+async function chamarAPITexto(texto, parteAtual, totalPartes) {
+  const promptParte = `Analise o trecho do Diário Oficial de Campo Grande-MS (Diogrande) — parte ${parteAtual} de ${totalPartes} — e extraia TODOS os atos que impactam a FOLHA DE PAGAMENTO. Retorne SOMENTE JSON válido, sem markdown.
+
+Regras: judicial=true quando mencionar "Sentença Judicial","Autos n." ou "cumprimento à Sentença". Null para campos desconhecidos. Licenças saúde: iniciais e prorrogações separadas.
+
+Formato (retorne exatamente estas chaves, arrays vazios se não houver):
+{"edicao":{"numero":"","data":""},"exoneracoes":[{"servidor":"","matricula":"","cargo":"","secretaria":"","dataCom":"","judicial":false,"resolucao":""}],"aposentadorias":[{"servidor":"","matricula":"","cargo":"","secretaria":"","tipo":"","dataCom":"","judicial":false,"resolucao":""}],"promocoes":[{"servidor":"","matricula":"","cargo":"","de":"","para":"","dataCom":"","judicial":false,"resolucao":""}],"progressoes":[{"servidor":"","matricula":"","cargo":"","de":"","para":"","tipo":"","dataCom":"","resolucao":""}],"estabilidades":[{"servidor":"","matricula":"","cargo":"","secretaria":"","dataEstabilidade":"","resolucao":""}],"abonosPermanencia":[{"servidor":"","matricula":"","cargo":"","secretaria":"","dataEfeito":"","judicial":false,"resolucao":""}],"gratificacoes":[{"servidor":"","matricula":"","cargo":"","secretaria":"","tipo":"","descricao":"","acao":"","dataEfeito":"","judicial":false,"resolucao":""}],"designacoes":[{"servidor":"","matricula":"","cargoOrigem":"","cargoDesignado":"","secretaria":"","tipo":"","inicio":"","termino":"","resolucao":""}],"adicional":[{"servidor":"","matricula":"","cargo":"","secretaria":"","tipo":"","percentual":"","acao":"","dataEfeito":"","judicial":false,"resolucao":""}],"reversoes":[{"servidor":"","matricula":"","cargo":"","secretaria":"","tipo":"","dataEfeito":"","resolucao":""}],"readaptacoes":[{"servidor":"","matricula":"","cargo":"","lotacao":"","inicio":"","termino":"","resolucao":""}],"licencasSaude":[{"servidor":"","matricula":"","cargo":"","dias":0,"inicio":"","termino":"","tipo":"","resolucao":""}],"licencasOutras":[{"servidor":"","matricula":"","tipo":"","inicio":"","termino":"","resolucao":""}],"sentencasJudiciais":[{"servidor":"","matricula":"","descricao":"","valor":"","secretaria":"","autos":"","resolucao":""}],"legislacao":[{"numero":"","tipo":"","ementa":"","impacto":"","dataPublicacao":"","dataEfeito":""}],"contratos":[{"empresa":"","objeto":"","valor":"","vigencia":"","resolucao":"","judicial":false}],"contratacoes":[{"candidato":"","funcao":"","edital":"","data":""}],"totaisJudiciais":0}
+
+TEXTO DO DIÁRIO OFICIAL:
+${texto.substring(0, 150000)}`;
+
+  try {
+    const resp = await fetch(PROXY_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 8000,
+        messages: [{ role: 'user', content: promptParte }]
+      })
+    });
+
+    if (!resp.ok) {
+      const err = await resp.json().catch(() => ({ error: { message: `HTTP ${resp.status}` } }));
+      throw new Error(err?.error?.message || `Erro HTTP ${resp.status}`);
+    }
+
+    const data = await resp.json();
+    const texto2 = data.content?.find(b => b.type === 'text')?.text || '';
+    const clean = texto2.replace(/```json|```/g, '').trim();
+    return JSON.parse(clean);
+  } catch(e) {
+    console.error(`Erro na parte ${parteAtual}:`, e);
+    return null;
+  }
+}
+
+async function chamarAPI(base64, parteAtual, totalPartes) {
   const prompt = `Analise o PDF do Diário Oficial de Campo Grande-MS (Diogrande) e extraia TODOS os atos que impactam a FOLHA DE PAGAMENTO. Retorne SOMENTE JSON válido, sem markdown.
 
 Regras: judicial=true quando mencionar "Sentença Judicial","Autos n." ou "cumprimento à Sentença". Null para campos desconhecidos. Licenças saúde: iniciais e prorrogações separadas.
@@ -872,15 +994,12 @@ Formato (retorne exatamente estas chaves, arrays vazios se não houver):
     const texto = data.content?.find(b => b.type === 'text')?.text || '';
     const clean = texto.replace(/```json|```/g, '').trim();
     const json = JSON.parse(clean);
-
     renderPainel(json);
   } catch(e) {
     setLoading(false);
     let hint = '';
     if (e.message.includes('Failed to fetch') || e.message.includes('NetworkError') || e.message.includes('ERR_CONNECTION_REFUSED')) {
-      hint = 'O servidor local não está rodando.\n→ Abra o terminal, entre na pasta do app e execute:\n  python servidor.py';
-    } else if (e.message.includes('API Key') || e.message.includes('401')) {
-      hint = 'Chave de API inválida ou não configurada.\n→ Defina antes de iniciar o servidor:\n  Windows: set ANTHROPIC_API_KEY=sk-ant-...\n  Mac/Linux: export ANTHROPIC_API_KEY=sk-ant-...';
+      hint = 'Verifique sua conexão com a internet.';
     } else if (e.message.includes('JSON')) {
       hint = 'A IA retornou uma resposta inesperada. Tente novamente.';
     }
