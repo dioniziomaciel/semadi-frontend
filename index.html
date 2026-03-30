@@ -839,56 +839,12 @@ async function processarPDF(file) {
 
   setLoading(true, 'Enviando para análise via IA (Claude)...');
 
-  const prompt = `Você é um assistente especializado em Diário Oficial Municipal (Diogrande de Campo Grande-MS).
-Analise este PDF e extraia TODOS os atos que impactam diretamente a FOLHA DE PAGAMENTO dos servidores municipais.
-Retorne SOMENTE um JSON válido, sem markdown, sem texto antes ou depois.
+  const prompt = `Analise o PDF do Diário Oficial de Campo Grande-MS (Diogrande) e extraia TODOS os atos que impactam a FOLHA DE PAGAMENTO. Retorne SOMENTE JSON válido, sem markdown.
 
-REGRAS GERAIS:
-- Inclua TODOS os servidores, mesmo com múltiplos registros na mesma edição
-- judicial=true quando mencionar "Sentença Judicial", "Autos n.", "cumprimento à Sentença" ou "determinação judicial"
-- Para licencasSaude: inclua iniciais e prorrogações como itens separados
-- Para leis e decretos: inclua apenas os que alteram salários, tabelas, benefícios ou direitos funcionais
-- Quando não souber um campo, use null (não invente)
+Regras: judicial=true quando mencionar "Sentença Judicial","Autos n." ou "cumprimento à Sentença". Null para campos desconhecidos. Licenças saúde: iniciais e prorrogações separadas.
 
-{
-  "edicao": { "numero": "8.265", "data": "23/03/2026" },
-
-  "exoneracoes": [{ "servidor":"Nome","matricula":"123/01","cargo":"...","secretaria":"...","dataCom":"10/03/2026","judicial":false,"resolucao":"PE SEMADI n. 1.327" }],
-
-  "aposentadorias": [{ "servidor":"Nome","matricula":"...","cargo":"...","secretaria":"...","tipo":"voluntária|compulsória|invalidez","dataCom":"...","judicial":false,"resolucao":"..." }],
-
-  "promocoes": [{ "servidor":"Nome","matricula":"...","cargo":"...","de":"Classe B","para":"Classe C","dataCom":"...","judicial":true,"resolucao":"..." }],
-
-  "progressoes": [{ "servidor":"Nome","matricula":"...","cargo":"...","de":"Ref. 10","para":"Ref. 11","tipo":"merecimento|titulação|antiguidade","dataCom":"...","resolucao":"..." }],
-
-  "estabilidades": [{ "servidor":"Nome","matricula":"...","cargo":"...","secretaria":"...","dataEstabilidade":"...","resolucao":"..." }],
-
-  "abonosPermanencia": [{ "servidor":"Nome","matricula":"...","cargo":"...","secretaria":"...","dataEfeito":"...","judicial":true,"resolucao":"..." }],
-
-  "gratificacoes": [{ "servidor":"Nome","matricula":"...","cargo":"...","secretaria":"...","tipo":"FG|CD|GAEE|GATS|outra","descricao":"...","acao":"concessão|cassação|revisão","dataEfeito":"...","judicial":false,"resolucao":"..." }],
-
-  "designacoes": [{ "servidor":"Nome","matricula":"...","cargoOrigem":"...","cargoDesignado":"...","secretaria":"...","tipo":"substituição|designação","inicio":"...","termino":"...","resolucao":"..." }],
-
-  "adicional": [{ "servidor":"Nome","matricula":"...","cargo":"...","secretaria":"...","tipo":"insalubridade|periculosidade|noturno|magistério","percentual":"...","acao":"concessão|cessação","dataEfeito":"...","judicial":false,"resolucao":"..." }],
-
-  "reversoes": [{ "servidor":"Nome","matricula":"...","cargo":"...","secretaria":"...","tipo":"reversão|aproveitamento|recondução","dataEfeito":"...","resolucao":"..." }],
-
-  "readaptacoes": [{ "servidor":"Nome","matricula":"...","cargo":"...","lotacao":"...","inicio":"...","termino":"...","resolucao":"..." }],
-
-  "licencasSaude": [{ "servidor":"Nome","matricula":"...","cargo":"...","dias":30,"inicio":"01/02/2026","termino":"02/03/2026","tipo":"inicial|prorrogação","resolucao":"..." }],
-
-  "licencasOutras": [{ "servidor":"Nome","matricula":"...","tipo":"acompanhar cônjuge|prêmio|mandato classista|licença sem vencimento|outra","inicio":"...","termino":"...","resolucao":"..." }],
-
-  "sentencasJudiciais": [{ "servidor":"Nome","matricula":"...","descricao":"...","valor":"...","secretaria":"...","autos":"...","resolucao":"..." }],
-
-  "legislacao": [{ "numero":"Lei 6.234/2026","tipo":"lei|decreto|portaria","ementa":"...","impacto":"reajuste salarial|novo benefício|alteração plano carreira|outro","dataPublicacao":"...","dataEfeito":"..." }],
-
-  "contratos": [{ "empresa":"Nome","objeto":"...","valor":"R$ 1.000,00","vigencia":"...","resolucao":"Contrato 55/2026","judicial":false }],
-
-  "contratacoes": [{ "candidato":"Nome","funcao":"...","edital":"...","data":"..." }],
-
-  "totaisJudiciais": 0
-}`;
+Formato (retorne exatamente estas chaves, arrays vazios se não houver):
+{"edicao":{"numero":"","data":""},"exoneracoes":[{"servidor":"","matricula":"","cargo":"","secretaria":"","dataCom":"","judicial":false,"resolucao":""}],"aposentadorias":[{"servidor":"","matricula":"","cargo":"","secretaria":"","tipo":"","dataCom":"","judicial":false,"resolucao":""}],"promocoes":[{"servidor":"","matricula":"","cargo":"","de":"","para":"","dataCom":"","judicial":false,"resolucao":""}],"progressoes":[{"servidor":"","matricula":"","cargo":"","de":"","para":"","tipo":"","dataCom":"","resolucao":""}],"estabilidades":[{"servidor":"","matricula":"","cargo":"","secretaria":"","dataEstabilidade":"","resolucao":""}],"abonosPermanencia":[{"servidor":"","matricula":"","cargo":"","secretaria":"","dataEfeito":"","judicial":false,"resolucao":""}],"gratificacoes":[{"servidor":"","matricula":"","cargo":"","secretaria":"","tipo":"","descricao":"","acao":"","dataEfeito":"","judicial":false,"resolucao":""}],"designacoes":[{"servidor":"","matricula":"","cargoOrigem":"","cargoDesignado":"","secretaria":"","tipo":"","inicio":"","termino":"","resolucao":""}],"adicional":[{"servidor":"","matricula":"","cargo":"","secretaria":"","tipo":"","percentual":"","acao":"","dataEfeito":"","judicial":false,"resolucao":""}],"reversoes":[{"servidor":"","matricula":"","cargo":"","secretaria":"","tipo":"","dataEfeito":"","resolucao":""}],"readaptacoes":[{"servidor":"","matricula":"","cargo":"","lotacao":"","inicio":"","termino":"","resolucao":""}],"licencasSaude":[{"servidor":"","matricula":"","cargo":"","dias":0,"inicio":"","termino":"","tipo":"","resolucao":""}],"licencasOutras":[{"servidor":"","matricula":"","tipo":"","inicio":"","termino":"","resolucao":""}],"sentencasJudiciais":[{"servidor":"","matricula":"","descricao":"","valor":"","secretaria":"","autos":"","resolucao":""}],"legislacao":[{"numero":"","tipo":"","ementa":"","impacto":"","dataPublicacao":"","dataEfeito":""}],"contratos":[{"empresa":"","objeto":"","valor":"","vigencia":"","resolucao":"","judicial":false}],"contratacoes":[{"candidato":"","funcao":"","edital":"","data":""}],"totaisJudiciais":0}`;
 
   try {
     const resp = await fetch(PROXY_URL, {
